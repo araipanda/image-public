@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>銘柄擬人化ちびキャラギャラリー | Image Master</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f141c;
+      --card-bg: #18202c;
+      --card-border: #283548;
+      --card-hover: #222d3d;
+      --text-main: #f1f5f9;
+      --text-sub: #94a3b8;
+      --text-muted: #64748b;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.25);
+      --badge-done-bg: rgba(34, 197, 94, 0.15);
+      --badge-done-text: #4ade80;
+      --badge-done-border: rgba(34, 197, 94, 0.3);
+      --badge-wait-bg: rgba(245, 158, 11, 0.15);
+      --badge-wait-text: #fbbf24;
+      --badge-wait-border: rgba(245, 158, 11, 0.3);
+      --font-main: 'M PLUS Rounded 1c', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ヘッダー */
+    header {
+      background: rgba(24, 32, 44, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 16px 24px;
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .header-content {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .title-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .title-area h1 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .title-area .badge-total {
+      background: #1e293b;
+      color: #94a3b8;
+      border: 1px solid var(--card-border);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 9999px;
+      font-family: var(--font-code);
+    }
+
+    /* コントロールエリア（検索・フィルター） */
+    .controls-area {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .search-box input {
+      width: 100%;
+      background: #101620;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 8px 14px 8px 36px;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .search-box .icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+
+    .filter-tabs {
+      display: flex;
+      background: #101620;
+      padding: 3px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      gap: 2px;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-sub);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover {
+      color: var(--text-main);
+    }
+
+    .filter-btn.active {
+      background: #243042;
+      color: #38bdf8;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    /* メインコンテンツ */
+    main {
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 20px;
+      flex: 1;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    /* カードデザイン */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+      border-color: #3b4d66;
+    }
+
+    /* 画像プレビュー部分 */
+    .card-img-wrapper {
+      width: 100%;
+      height: 320px;
+      background: #090d13;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background-color: #ffffff;
+      transition: transform 0.3s;
+    }
+
+    .card:hover .card-img {
+      transform: scale(1.03);
+    }
+
+    .placeholder-box {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(180deg, #131a24 0%, #0d1219 100%);
+      color: var(--text-muted);
+      padding: 24px;
+      text-align: center;
+    }
+
+    .placeholder-icon {
+      font-size: 2.8rem;
+      opacity: 0.6;
+    }
+
+    .placeholder-text {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-sub);
+    }
+
+    .placeholder-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* ステータスバッジ */
+    .status-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      z-index: 10;
+    }
+
+    .badge-done {
+      background: var(--badge-done-bg);
+      color: var(--badge-done-text);
+      border: 1px solid var(--badge-done-border);
+    }
+
+    .badge-waiting {
+      background: var(--badge-wait-bg);
+      color: var(--badge-wait-text);
+      border: 1px solid var(--badge-wait-border);
+    }
+
+    .badge-done::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+    }
+
+    .badge-waiting::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #fbbf24;
+    }
+
+    /* カード詳細本文 */
+    .card-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 10px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .stock-code {
+      font-family: var(--font-code);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    .stock-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-concept {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid var(--accent);
+      padding: 6px 10px;
+      border-radius: 0 6px 6px 0;
+      line-height: 1.4;
+    }
+
+    .card-details {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .detail-row {
+      display: flex;
+      gap: 6px;
+      line-height: 1.4;
+    }
+
+    .detail-label {
+      color: var(--text-muted);
+      font-weight: 700;
+      min-width: 65px;
+      flex-shrink: 0;
+    }
+
+    .detail-val {
+      color: #cbd5e1;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .color-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .color-tag {
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #111827;
+      border: 1px solid #374151;
+      color: #cbd5e1;
+    }
+
+    /* モーダル */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
+    }
+
+    @media (min-width: 768px) {
+      .modal-content {
+        flex-direction: row;
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+      transition: background 0.2s;
+    }
+
+    .modal-close:hover {
+      background: #334155;
+    }
+
+    .modal-left {
+      flex: 1;
+      background: #090d13;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 380px;
+      padding: 20px;
+    }
+
+    .modal-left img {
+      max-width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    .modal-right {
+      flex: 1.2;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .modal-code {
+      font-family: var(--font-code);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .modal-name {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .modal-section-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 6px;
+    }
+
+    .modal-section-body {
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      line-height: 1.5;
+    }
+
+    /* 空状態 */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+      grid-column: 1 / -1;
+    }
+
+    /* フッター */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 16px 24px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="title-area">
+        <h1>✨ 銘柄擬人化ちびキャラギャラリー</h1>
+        <span class="badge-total" id="badgeTotal">0 銘柄</span>
+      </div>
+      <div class="controls-area">
+        <div class="search-box">
+          <span class="icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="コード、銘柄名、コンセプトで検索...">
+        </div>
+        <div class="filter-tabs">
+          <button class="filter-btn active" data-filter="all">すべて (<span id="countAll">0</span>)</button>
+          <button class="filter-btn" data-filter="done">生成済み (<span id="countDone">0</span>)</button>
+          <button class="filter-btn" data-filter="waiting">生成待ち (<span id="countWaiting">0</span>)</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- カードがJSで動的描画されます -->
+    </div>
+  </main>
+
+  <footer>
+    <p>Image Master Repository &bull; ComfyUI Chibi Character Generator Pipeline</p>
+  </footer>
+
+  <!-- 詳細モーダル -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-left" id="modalLeft">
+        <!-- 画像またはプレースホルダー -->
+      </div>
+      <div class="modal-right" id="modalRight">
+        <!-- 詳細テキスト -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STOCKS_DATA = [
+  {
+    "code": "219A",
+    "name": "Ｈｅａｒｔｓｅｅｄ",
+    "corp": "慶應大発バイオ。iPS細胞から作った微小組織「心筋球」を心臓に直接移植し、心機能を根本再生させる最先端心臓再生医療。",
+    "concept": "命の種を宿すバイオテック・ヒーラー",
+    "hair": "ふんわりと柔らかく波打つ淡いピンクのウェーブロング（片側を肩に掛けたサイドスタイル、心筋球を模したハート型ヘアピン留め）",
+    "eyes": "慈愛に満ちた優しいタレ目と、柔らかなアーチ眉。瞳は透き通るローズレッドで、微かにハート型のハイライト（heart-shaped pupils）が脈打つように光る",
+    "visual": "フューチャーナース風のドレスと白衣を纏い、胸元と両手のひらに淡く光るハート型のオーブを浮かべた神秘的な姿。",
+    "motif": "心筋球（ハート型の発光カプセル）、心電図ウェーブ、バイオ注射器、ローズレッドのリボン。",
+    "color": "ハートピンク、ローズレッド、クリーンホワイト。",
+    "source_file": "20261104_watchlist_candidates.md",
+    "has_image": true,
+    "image_path": "output/21/219A/base.png"
+  },
+  {
+    "code": "336A",
+    "name": "ダイナミックマッププラットフォーム",
+    "corp": "自動運転やADAS（先進運転支援）を支えるセンチメートル級の「高精度3次元地図データ（HDマップ）」と点群データをグローバルに提供する基盤企業。",
+    "concept": "世界を高精度にマッピングする3次元ナビゲーター",
+    "hair": "元気いっぱいのシアン系サイドポニーテール（頭頂部に高精度GPS信号をキャッチするぴょこんとしたアホ毛アンテナ付き）",
+    "eyes": "好奇心旺盛で快活な丸目と、キリッとした眉。瞳の中には高精度測位を示す十字照準（cross-shaped target pupils）がオレンジに輝く",
+    "visual": "測量用レーダーゴーグルを頭にかけ、手に持ったタブレットから道路や街並みの3Dホログラム点群マップ（ポイントクラウド）を周囲に展開する測量士風サイバーナビゲーター。",
+    "motif": "3D立体ホログラム道路マップ、計測レーダーアンテナ、浮遊する光る測位ドローン。",
+    "color": "ホログラムシアン、ネオンオレンジ、ホワイト。",
+    "source_file": "20261104_watchlist_candidates.md",
+    "has_image": true,
+    "image_path": "output/33/336A/base.png"
+  },
+  {
+    "code": "3697",
+    "name": "ＳＨＩＦＴ",
+    "corp": "ソフトウェアテスト・品質保証のパイオニアであり、バグを未然に防ぎシステムの高品質化とDXを総合支援する業界リーダー。",
+    "concept": "すべてのバグを洗い流し品質を極めるパーフェクトQAエンジニア",
+    "hair": "几帳面できっちり編み込まれたエメラルドグリーングラデーションのツインブレイド（おさげ三つ編み）",
+    "eyes": "知的なオーバル眼鏡の奥に輝く澄んだ丸目と、端正な平行眉。瞳は不具合を絶対に見逃さないエメラルドグリーン。優しく頼もしい微笑み",
+    "visual": "知的なメガネをかけ、巨大なグリーンチェックマーク（合格）のステッキを手に持ち、流れるコードからバグを取り除くスーツ姿の優等生少女。",
+    "motif": "グリーンのチェックマークバッジ、チェックリストのバインダー、虫取り網型のデジタルワンド、デバッグ虫眼鏡。",
+    "color": "エメラルドグリーン、ディープネイビー、クリーンホワイト。",
+    "source_file": "20261104_watchlist_candidates.md",
+    "has_image": true,
+    "image_path": "output/36/3697/base.png"
+  },
+  {
+    "code": "3905",
+    "name": "データセクション",
+    "corp": "大規模AIデータセンターの運営・投資や、最先端GPUクラウド基盤「TAIZA」を展開するAIインフラ＆ビッグデータ企業。",
+    "concept": "膨大なAI計算能力を操る超巨大GPUデータセンター管理者",
+    "hair": "知的でクールな漆黒のアシンメトリーショート（右側が長めで、内側にエレクトリックグリーンのインナーカラー）",
+    "eyes": "冷静沈着で分析的なジト目と、理知的な平行眉。瞳はディープグリーンで、微細な電子回路模様（circuit pupils）が発光している",
+    "visual": "水冷パイプが走る光るサイバーコートを羽織り、両手で空中に巨大なGPUクラスターとホログラムのデータストリームを操作するサイバーテック少女。",
+    "motif": "GPUアクセラレータボード、緑色と青色の光ファイバーケーブル、水冷チューブ、浮遊するサーバーラック。",
+    "color": "エレクトリックグリーン、ディープブラック、サイバーブルー。",
+    "source_file": "20261104_watchlist_candidates.md",
+    "has_image": true,
+    "image_path": "output/39/3905/base.png"
+  },
+  {
+    "code": "4258",
+    "name": "網屋",
+    "corp": "企業のサーバー・クラウドアクセスログを自然文で翻訳・統合管理する「ALog」や、クラウド型ネットワークセキュリティを提供するサイバー防御企業。",
+    "concept": "不正侵入を絶対に逃さないサイバーネット・ハッカーハンター",
+    "hair": "シルバーグレーの軽快な外ハネウルフショート（前髪の片側が少し長めで片目をかすかに覆うミステリアスなシルエット）",
+    "eyes": "獲物を見逃さない鋭いジト目（猫目気味）と、挑発的なキリ眉。口元に不敵な自信の笑みを浮かべている。瞳はコバルトブルー",
+    "visual": "光るデジタルの網（サイバーネット）を構え、あらゆる通信ログを追跡する虫眼鏡型スキャナを持つサイバースタイルの警備少女。",
+    "motif": "光るデジタルの蜘蛛の巣（ネット）、ログ解析虫眼鏡スキャナ、南京錠アイコン、セキュリティシールド。",
+    "color": "コバルトブルー、ネオンパープル、シルバー。",
+    "source_file": "20261104_watchlist_candidates.md",
+    "has_image": true,
+    "image_path": "output/42/4258/base.png"
+  },
+  {
+    "code": "4498",
+    "name": "サイバートラスト",
+    "corp": "日本初の商用電子認証局としての実績と、組込み/国産Linux「MIRACLE LINUX」の技術を融合し、人・モノ・社会のデジタル証明を支えるトラスト企業。",
+    "concept": "デジタルの真贋を証明する認証局のサイバーテンプル・ガーディアン",
+    "hair": "気品と規律正しさを感じさせる濃紺のストレート前下がりボブ（サイドの髪を金色ピンで留めたハーフアップ風アレンジ）",
+    "eyes": "揺るぎない信頼感を宿す凛とした切れ長目と、誠実な平行眉。瞳は金色の鍵穴のような模様（keyhole highlight）が浮かぶロイヤルブルー",
+    "visual": "金色のデジタル南京錠と鍵を胸に掲げ、胸元にペンギンのワッペンがついた騎士風のフォーマルスーツを着た凛々しい守護少女。",
+    "motif": "暗号鍵（ゴールデンキー）、デジタル証明書の南京錠、認証スタンプ、Linuxペンギンモチーフ。",
+    "color": "ロイヤルブルー、ゴールド、ピュアホワイト。",
+    "source_file": "20261104_watchlist_candidates.md",
+    "has_image": true,
+    "image_path": "output/44/4498/base.png"
+  },
+  {
+    "code": "485A",
+    "name": "パワーエックス",
+    "corp": "国内自社工場で大型蓄電池や超急速EV充電器を製造し、世界初の電気運搬船構想も進める次世代エネルギーベンチャー。",
+    "concept": "電力を操る重装備インダストリアル女子",
+    "hair": "躍動感ある金髪のハイポニーテール（毛先が稲妻のようにギザギザにハネており、内側に黒のインナーカラー）",
+    "eyes": "好奇心と力強さを感じさせるパッチリした大きな丸目と、気合の入ったキリ眉。瞳は電気スパークを宿した鮮やかなエレクトリックイエロー",
+    "visual": "背中に大型バッテリーパックユニットを背負い、充電プラグ型のデバイスとケーブルを携えたメカニカルアーマー姿。",
+    "motif": "超急速充電プラグ、蓄電池ブロック、電気スパーク、船の錨エンブレム。",
+    "color": "エレクトリックイエロー、マットブラック、ネイビーブルー。",
+    "source_file": "20261104_watchlist_candidates.md",
+    "has_image": true,
+    "image_path": "output/48/485A/base.png"
+  },
+  {
+    "code": "5599",
+    "name": "Ｓ＆Ｊ",
+    "corp": "24時間365日体制のセキュリティ監視（SOC）と、高度なサイバー攻撃・インシデントへの迎撃・防御を専門に行うサイバー防衛企業。",
+    "concept": "24時間体制でサイバー攻撃を迎撃するSOC防衛指令官",
+    "hair": "ヘッドセットを装着しやすい、すっきりまとめたダークネイビーのお団子ヘア（シニヨン）（襟足はシャープに整えられた軍事オペレーター調）",
+    "eyes": "24時間監視の緊迫感を表す鋭いツリ目と、引き締まったキリ眉。瞳は警戒アラートを映すクリムゾンレッドで、射るような真剣な眼差し",
+    "visual": "オペレーター用のヘッドセットを着け、複数の警戒レーダースクリーンを背に、サイバー迎撃シールドを展開するミリタリータクティカルスーツ少女。",
+    "motif": "通信用ヘッドセット、レーダーホログラム、六角形の防御バリア（ヘキサゴンシールド）、警告アラートランプ。",
+    "color": "タクティカルネイビー、クリムゾンレッド、ガンメタルグレー。",
+    "source_file": "20261104_watchlist_candidates.md",
+    "has_image": true,
+    "image_path": "output/55/5599/base.png"
+  },
+  {
+    "code": "6613",
+    "name": "ＱＤレーザ",
+    "corp": "世界初の量子ドット半導体レーザ量産技術と、網膜に直接映像を描画するスマートグラス（RETISSA）を展開する先端光学ディープテック。",
+    "concept": "光と視界を拡張するサイバーアイ少女",
+    "hair": "水色グラデーションの入った白髪のサイバーツインテール（毛先に光ファイバー調のネオンレッド発光ライン）",
+    "eyes": "自信に満ちたシャープなツリ目とキリ眉。瞳は赤色レーザーのようにネオンレッドで発光し、細い照準リング（target pupils）が浮かんでいる",
+    "visual": "半透明のサイバーバイザー（スマートグラス）を装着し、指先や周囲から細い光線（レーザービーム）を放つ近未来SFスタイル。白とシアン基調のフューチャリスティックスーツ。",
+    "motif": "量子ドット（浮遊する微細な発光キューブ）、網膜投影レンズ、赤いレーザー光線。",
+    "color": "ネオンレッド、サイバーシアン、白。",
+    "source_file": "20261104_watchlist_candidates.md",
+    "has_image": true,
+    "image_path": "output/66/6613/base.png"
+  }
+];
+
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    const galleryGrid = document.getElementById('galleryGrid');
+    const searchInput = document.getElementById('searchInput');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const badgeTotal = document.getElementById('badgeTotal');
+    const countAll = document.getElementById('countAll');
+    const countDone = document.getElementById('countDone');
+    const countWaiting = document.getElementById('countWaiting');
+
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalClose = document.getElementById('modalClose');
+    const modalLeft = document.getElementById('modalLeft');
+    const modalRight = document.getElementById('modalRight');
+
+    function updateCounts() {
+      const total = STOCKS_DATA.length;
+      const done = STOCKS_DATA.filter(s => s.has_image).length;
+      const waiting = total - done;
+
+      badgeTotal.textContent = `${total} 銘柄`;
+      countAll.textContent = total;
+      countDone.textContent = done;
+      countWaiting.textContent = waiting;
+    }
+
+    function renderCards() {
+      const q = searchQuery.toLowerCase().trim();
+
+      const filtered = STOCKS_DATA.filter(item => {
+        // ステータスフィルター
+        if (currentFilter === 'done' && !item.has_image) return false;
+        if (currentFilter === 'waiting' && item.has_image) return false;
+
+        // 検索フィルター
+        if (!q) return true;
+        const textTarget = [
+          item.code,
+          item.name,
+          item.concept,
+          item.hair,
+          item.eyes,
+          item.visual,
+          item.motif,
+          item.color,
+          item.corp
+        ].join(' ').toLowerCase();
+
+        return textTarget.includes(q);
+      });
+
+      if (filtered.length === 0) {
+        galleryGrid.innerHTML = `
+          <div class="empty-state">
+            <p style="font-size: 2rem; margin-bottom: 8px;">🍂</p>
+            <p>該当する擬人化キャラが見つかりませんでした。</p>
+          </div>
+        `;
+        return;
+      }
+
+      galleryGrid.innerHTML = filtered.map(item => {
+        const isDone = item.has_image;
+        const badgeHtml = isDone
+          ? `<span class="status-badge badge-done">生成済み</span>`
+          : `<span class="status-badge badge-waiting">生成待ち</span>`;
+
+        const imageHtml = isDone
+          ? `<img src="${item.image_path}" alt="${item.name}" class="card-img" loading="lazy">`
+          : `
+            <div class="placeholder-box">
+              <div class="placeholder-icon">🎨</div>
+              <div class="placeholder-text">ComfyUI 生成待ち</div>
+              <div class="placeholder-sub">メインPCで一括生成予定</div>
+            </div>
+          `;
+
+        const colors = item.color ? item.color.split(/[、,]/).map(c => c.trim()).filter(Boolean) : [];
+        const colorTagsHtml = colors.map(c => `<span class="color-tag">${c}</span>`).join('');
+
+        return `
+          <div class="card" onclick="openModal('${item.code}')">
+            <div class="card-img-wrapper">
+              ${badgeHtml}
+              ${imageHtml}
+            </div>
+            <div class="card-body">
+              <div class="card-header">
+                <span class="stock-code">${item.code}</span>
+                <span class="stock-name" title="${item.name}">${item.name}</span>
+              </div>
+              <div class="card-concept">${item.concept || 'コンセプト未設定'}</div>
+              <div class="card-details">
+                <div class="detail-row">
+                  <span class="detail-label">企業イメージ</span>
+                  <span class="detail-val">${item.corp || '—'}</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">モチーフ</span>
+                  <span class="detail-val">${item.motif || '—'}</span>
+                </div>
+                <div class="color-tags">
+                  ${colorTagsHtml}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openModal(code) {
+      const item = STOCKS_DATA.find(s => s.code === code);
+      if (!item) return;
+
+      const isDone = item.has_image;
+      modalLeft.innerHTML = isDone
+        ? `<img src="${item.image_path}" alt="${item.name}">`
+        : `
+          <div class="placeholder-box" style="padding: 40px;">
+            <div class="placeholder-icon" style="font-size: 4rem;">🎨</div>
+            <div class="placeholder-text" style="font-size: 1.1rem; margin-top: 12px;">ComfyUI 生成待ち</div>
+            <div class="placeholder-sub" style="font-size: 0.85rem; margin-top: 6px;">
+              メインPCで <code>python make_base.py ${item.code}</code> を実行すると生成されます
+            </div>
+          </div>
+        `;
+
+      const colors = item.color ? item.color.split(/[、,]/).map(c => c.trim()).filter(Boolean) : [];
+      const colorTagsHtml = colors.map(c => `<span class="color-tag" style="padding: 4px 10px; font-size: 0.8rem;">${c}</span>`).join(' ');
+
+      modalRight.innerHTML = `
+        <div>
+          <div class="modal-code">${item.code}</div>
+          <h2 class="modal-name">${item.name}</h2>
+          <div class="card-concept" style="display: inline-block; margin-top: 4px; font-size: 0.95rem;">
+            ${item.concept || 'コンセプト未設定'}
+          </div>
+        </div>
+
+        <div>
+          <div class="modal-section-title">🏢 企業イメージ</div>
+          <div class="modal-section-body">${item.corp || '—'}</div>
+        </div>
+
+        ${item.hair ? `
+        <div>
+          <div class="modal-section-title">💇 髪型・ヘアスタイル</div>
+          <div class="modal-section-body">${item.hair}</div>
+        </div>
+        ` : ''}
+
+        ${item.eyes ? `
+        <div>
+          <div class="modal-section-title">👁️ 目・眉の形</div>
+          <div class="modal-section-body">${item.eyes}</div>
+        </div>
+        ` : ''}
+
+        <div>
+          <div class="modal-section-title">👗 ビジュアル特徴</div>
+          <div class="modal-section-body">${item.visual || '—'}</div>
+        </div>
+
+        <div>
+          <div class="modal-section-title">🪄 モチーフ・小物</div>
+          <div class="modal-section-body">${item.motif || '—'}</div>
+        </div>
+
+        <div>
+          <div class="modal-section-title">🎨 キーカラー</div>
+          <div class="color-tags" style="margin-top: 6px;">
+            ${colorTagsHtml || '—'}
+          </div>
+        </div>
+
+        ${isDone ? `
+          <div style="margin-top: 10px;">
+            <a href="${item.image_path}" target="_blank" style="color: var(--accent); font-size: 0.85rem; text-decoration: none; font-weight: 700;">
+              ↗ 画像を直接開く (${item.image_path})
+            </a>
+          </div>
+        ` : ''}
+      `;
+
+      modalOverlay.classList.add('active');
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove('active');
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // 検索イベント
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      renderCards();
+    });
+
+    // フィルタータブ切り替え
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        renderCards();
+      });
+    });
+
+    // 初期化
+    updateCounts();
+    renderCards();
+  </script>
+</body>
+</html>
