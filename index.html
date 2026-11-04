@@ -97,7 +97,7 @@
       font-family: var(--font-code);
     }
 
-    /* コントロールエリア（検索・フィルター） */
+    /* 検索・フィルターバー */
     .controls-area {
       display: flex;
       flex-wrap: wrap;
@@ -113,15 +113,15 @@
 
     .search-box input {
       width: 100%;
-      background: #101620;
+      background: #101722;
       border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 8px 14px 8px 36px;
       color: var(--text-main);
+      padding: 8px 14px 8px 36px;
+      border-radius: 8px;
       font-size: 0.9rem;
+      font-family: inherit;
       outline: none;
       transition: all 0.2s;
-      font-family: inherit;
     }
 
     .search-box input:focus {
@@ -129,64 +129,68 @@
       box-shadow: 0 0 0 3px var(--accent-glow);
     }
 
-    .search-box .icon {
+    .search-box svg {
       position: absolute;
       left: 12px;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--text-muted);
-      font-size: 0.9rem;
+      width: 16px;
+      height: 16px;
+      fill: var(--text-muted);
       pointer-events: none;
     }
 
     .filter-tabs {
       display: flex;
-      background: #101620;
-      padding: 3px;
-      border-radius: 10px;
+      background: #101722;
       border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 3px;
       gap: 2px;
     }
 
-    .filter-btn {
+    .filter-tab {
       background: transparent;
       border: none;
       color: var(--text-sub);
+      padding: 6px 12px;
+      border-radius: 6px;
       font-size: 0.82rem;
       font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 8px;
       cursor: pointer;
       transition: all 0.2s;
       font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .filter-btn:hover {
+    .filter-tab:hover {
       color: var(--text-main);
     }
 
-    .filter-btn.active {
-      background: #243042;
-      color: #38bdf8;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    .filter-tab.active {
+      background: #1e293b;
+      color: var(--accent);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
     }
 
-    /* メインコンテンツ */
+    /* メインコンテナ */
     main {
       max-width: 1400px;
       width: 100%;
       margin: 0 auto;
-      padding: 24px 20px;
+      padding: 24px;
       flex: 1;
     }
 
-    .gallery-grid {
+    /* カードグリッド */
+    .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
     }
 
-    /* カードデザイン */
     .card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -194,100 +198,95 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      transition: all 0.25s ease;
       cursor: pointer;
       position: relative;
     }
 
     .card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
-      border-color: #3b4d66;
+      border-color: #3b82f6;
+      box-shadow: 0 12px 24px -10px rgba(56, 189, 248, 0.25);
     }
 
-    /* 画像プレビュー部分 */
-    .card-img-wrapper {
+    /* サムネイルエリア */
+    .card-thumb-wrap {
       width: 100%;
-      height: 320px;
+      height: 240px;
       background: #090d13;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: relative;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border-bottom: 1px solid var(--card-border);
     }
 
-    .card-img {
-      width: 100%;
-      height: 100%;
+    .card-thumb-wrap img {
+      max-width: 100%;
+      max-height: 100%;
       object-fit: contain;
-      background-color: #ffffff;
-      transition: transform 0.3s;
+      transition: transform 0.3s ease;
+      background: #ffffff;
     }
 
-    .card:hover .card-img {
-      transform: scale(1.03);
+    .card:hover .card-thumb-wrap img {
+      transform: scale(1.05);
     }
 
+    /* プレースホルダー */
     .placeholder-box {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      background: linear-gradient(180deg, #131a24 0%, #0d1219 100%);
-      color: var(--text-muted);
-      padding: 24px;
       text-align: center;
+      padding: 24px;
     }
 
     .placeholder-icon {
       font-size: 2.8rem;
-      opacity: 0.6;
+      margin-bottom: 8px;
+      opacity: 0.8;
     }
 
     .placeholder-text {
       font-size: 0.85rem;
       font-weight: 700;
-      color: var(--text-sub);
+      color: #fbbf24;
     }
 
     .placeholder-sub {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
+      margin-top: 4px;
     }
 
-    /* ステータスバッジ */
+    /* バッジ */
     .status-badge {
       position: absolute;
       top: 12px;
       right: 12px;
       font-size: 0.72rem;
       font-weight: 700;
-      padding: 3px 10px;
+      padding: 4px 10px;
       border-radius: 9999px;
       backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
       gap: 5px;
-      z-index: 10;
+      z-index: 2;
     }
 
-    .badge-done {
+    .status-badge.done {
       background: var(--badge-done-bg);
       color: var(--badge-done-text);
       border: 1px solid var(--badge-done-border);
     }
 
-    .badge-waiting {
+    .status-badge.waiting {
       background: var(--badge-wait-bg);
       color: var(--badge-wait-text);
       border: 1px solid var(--badge-wait-border);
     }
 
-    .badge-done::before {
+    .status-badge.done::before {
       content: "";
       width: 6px;
       height: 6px;
@@ -295,7 +294,7 @@
       background: #4ade80;
     }
 
-    .badge-waiting::before {
+    .status-badge.waiting::before {
       content: "";
       width: 6px;
       height: 6px;
@@ -402,7 +401,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(8px);
       z-index: 1000;
       align-items: center;
@@ -418,7 +417,7 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 20px;
-      max-width: 900px;
+      max-width: 960px;
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
@@ -428,7 +427,7 @@
       box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 820px) {
       .modal-content {
         flex-direction: row;
       }
@@ -457,27 +456,116 @@
       background: #334155;
     }
 
+    /* モーダル左側（画像＋切り替えタブ＋リアクション詳細） */
     .modal-left {
-      flex: 1;
+      flex: 1.1;
       background: #090d13;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 460px;
+      padding: 24px;
+      gap: 14px;
+      border-right: 1px solid var(--card-border);
+    }
+
+    .variant-tabs {
+      display: flex;
+      gap: 4px;
+      background: #131b26;
+      padding: 4px;
+      border-radius: 9999px;
+      border: 1px solid var(--card-border);
+      width: 100%;
+      max-width: 400px;
+      justify-content: space-between;
+    }
+
+    .variant-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-main);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 6px 6px;
+      border-radius: 9999px;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 380px;
-      padding: 20px;
+      gap: 4px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
     }
 
-    .modal-left img {
+    .variant-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .variant-btn.active {
+      background: var(--accent);
+      color: #0f172a;
+      box-shadow: 0 2px 8px var(--accent-glow);
+    }
+
+    .variant-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+    }
+
+    .variant-btn.unready .variant-dot {
+      background: #475569;
+    }
+
+    .modal-img-wrapper {
+      width: 100%;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+    }
+
+    .modal-img-wrapper img {
       max-width: 100%;
-      max-height: 500px;
+      max-height: 360px;
       object-fit: contain;
       background: #ffffff;
       border-radius: 12px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      transition: opacity 0.2s ease;
     }
 
+    .modal-reaction-card {
+      width: 100%;
+      background: #131b26;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      line-height: 1.45;
+    }
+
+    .modal-reaction-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* モーダル右側 */
     .modal-right {
-      flex: 1.2;
+      flex: 1.3;
       padding: 28px;
       display: flex;
       flex-direction: column;
@@ -512,6 +600,28 @@
       line-height: 1.5;
     }
 
+    .reaction-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .reaction-item {
+      background: #101722;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .reaction-item-title {
+      font-weight: 800;
+      font-size: 0.76rem;
+      margin-bottom: 2px;
+    }
+
     /* 空状態 */
     .empty-state {
       text-align: center;
@@ -539,23 +649,25 @@
         <h1>✨ 銘柄擬人化ちびキャラギャラリー</h1>
         <span class="badge-total" id="badgeTotal">0 銘柄</span>
       </div>
+
       <div class="controls-area">
         <div class="search-box">
-          <span class="icon">🔍</span>
-          <input type="text" id="searchInput" placeholder="コード、銘柄名、コンセプトで検索...">
+          <svg viewBox="0 0 24 24"><path d="M21.71 20.29l-5.4-5.4A8.93 8.93 0 0 0 18 9a9 9 0 1 0-9 9 8.93 8.93 0 0 0 5.89-2.31l5.4 5.4a1 1 0 0 0 1.42-1.4zM4 9a5 5 0 1 1 5 5 5 5 0 0 1-5-5z"/></svg>
+          <input type="text" id="searchInput" placeholder="銘柄名、コード、特徴、コンセプトで検索...">
         </div>
+
         <div class="filter-tabs">
-          <button class="filter-btn active" data-filter="all">すべて (<span id="countAll">0</span>)</button>
-          <button class="filter-btn" data-filter="done">生成済み (<span id="countDone">0</span>)</button>
-          <button class="filter-btn" data-filter="waiting">生成待ち (<span id="countWaiting">0</span>)</button>
+          <button class="filter-tab active" data-filter="all">すべて (<span id="countAll">0</span>)</button>
+          <button class="filter-tab" data-filter="done">生成済み (<span id="countDone">0</span>)</button>
+          <button class="filter-tab" data-filter="waiting">生成待ち (<span id="countWaiting">0</span>)</button>
         </div>
       </div>
     </div>
   </header>
 
   <main>
-    <div class="gallery-grid" id="galleryGrid">
-      <!-- カードがJSで動的描画されます -->
+    <div class="cards-grid" id="cardsGrid">
+      <!-- JavaScriptで動的生成 -->
     </div>
   </main>
 
@@ -568,7 +680,7 @@
     <div class="modal-content">
       <button class="modal-close" id="modalClose">&times;</button>
       <div class="modal-left" id="modalLeft">
-        <!-- 画像またはプレースホルダー -->
+        <!-- バリエーションタブ、画像、リアクション説明 -->
       </div>
       <div class="modal-right" id="modalRight">
         <!-- 詳細テキスト -->
@@ -588,7 +700,36 @@
     "visual": "フューチャーナース風のドレスと白衣を纏い、胸元と両手のひらに淡く光るハート型のオーブを浮かべた神秘的な姿。",
     "motif": "心筋球（ハート型の発光カプセル）、心電図ウェーブ、バイオ注射器、ローズレッドのリボン。",
     "color": "ハートピンク、ローズレッド、クリーンホワイト。",
+    "reaction_win": "心筋球オーブがぽかぽかと温かく巨大化し、無数のハートのエフェクトが咲き誇る中で優しく微笑む満面の癒やしスマイル（win.png）",
+    "reaction_loss": "心電図モニターが低めで微弱になり、ハートオーブの光が弱まって心配そうに眉を八の字にする困り顔（loss.png）",
+    "reaction_sl": "心筋球カプセルが転がってヒビが入り、白衣の裾が破けて心電図ウェーブがピーと一直線アラート、涙目でへたり込む（sl.png）",
     "source_file": "20261104_watchlist_candidates.md",
+    "images": {
+      "base": {
+        "exists": true,
+        "path": "output/21/219A/base.png",
+        "label": "通常",
+        "icon": "🌟"
+      },
+      "win": {
+        "exists": false,
+        "path": null,
+        "label": "利確",
+        "icon": "🏆"
+      },
+      "loss": {
+        "exists": false,
+        "path": null,
+        "label": "微損",
+        "icon": "💧"
+      },
+      "sl": {
+        "exists": false,
+        "path": null,
+        "label": "損切り",
+        "icon": "💥"
+      }
+    },
     "has_image": true,
     "image_path": "output/21/219A/base.png"
   },
@@ -602,7 +743,36 @@
     "visual": "測量用レーダーゴーグルを頭にかけ、手に持ったタブレットから道路や街並みの3Dホログラム点群マップ（ポイントクラウド）を周囲に展開する測量士風サイバーナビゲーター。",
     "motif": "3D立体ホログラム道路マップ、計測レーダーアンテナ、浮遊する光る測位ドローン。",
     "color": "ホログラムシアン、ネオンオレンジ、ホワイト。",
+    "reaction_win": "測位レーダーが「PRECISION 100%」を捉え、3D点群マップがキラキラ黄金色に展開！アホ毛アンテナをピンと立てて元気いっぱいのハイタッチポーズ（win.png）",
+    "reaction_loss": "レーダーゴーグルが砂嵐になり、アホ毛がしょんぼり折れて「GPSロスト中…」とタブレットを抱えてキョロキョロ（loss.png）",
+    "reaction_sl": "測位ドローンが墜落して煙を上げ、ナビゲータースーツの膝が破けて泥がつき、レーダーゴーグルがズレ落ちて涙目で迷子座り込み（sl.png）",
     "source_file": "20261104_watchlist_candidates.md",
+    "images": {
+      "base": {
+        "exists": true,
+        "path": "output/33/336A/base.png",
+        "label": "通常",
+        "icon": "🌟"
+      },
+      "win": {
+        "exists": false,
+        "path": null,
+        "label": "利確",
+        "icon": "🏆"
+      },
+      "loss": {
+        "exists": false,
+        "path": null,
+        "label": "微損",
+        "icon": "💧"
+      },
+      "sl": {
+        "exists": false,
+        "path": null,
+        "label": "損切り",
+        "icon": "💥"
+      }
+    },
     "has_image": true,
     "image_path": "output/33/336A/base.png"
   },
@@ -616,7 +786,36 @@
     "visual": "知的なメガネをかけ、巨大なグリーンチェックマーク（合格）のステッキを手に持ち、流れるコードからバグを取り除くスーツ姿の優等生少女。",
     "motif": "グリーンのチェックマークバッジ、チェックリストのバインダー、虫取り網型のデジタルワンド、デバッグ虫眼鏡。",
     "color": "エメラルドグリーン、ディープネイビー、クリーンホワイト。",
+    "reaction_win": "チェックリスト全項目に巨大なグリーンチェック（合格）マークが輝き、バグ取りステッキを高々と掲げて「オールグリーン！完璧な品質です！」と満開スマイル（win.png）",
+    "reaction_loss": "バインダーの片隅に見落としバグを発見、眼鏡を指で直しながら「うぅ、私のチェック漏れ…」と頬を染めて反省しょんぼり（loss.png）",
+    "reaction_sl": "大量のエラーコードが雪崩のように押し寄せ、チェックバインダーがバラバラに吹き飛び、メガネが歪んで白衣が破け、バグ取り網を抱えて涙目パニック（sl.png）",
     "source_file": "20261104_watchlist_candidates.md",
+    "images": {
+      "base": {
+        "exists": true,
+        "path": "output/36/3697/base.png",
+        "label": "通常",
+        "icon": "🌟"
+      },
+      "win": {
+        "exists": false,
+        "path": null,
+        "label": "利確",
+        "icon": "🏆"
+      },
+      "loss": {
+        "exists": false,
+        "path": null,
+        "label": "微損",
+        "icon": "💧"
+      },
+      "sl": {
+        "exists": false,
+        "path": null,
+        "label": "損切り",
+        "icon": "💥"
+      }
+    },
     "has_image": true,
     "image_path": "output/36/3697/base.png"
   },
@@ -630,7 +829,36 @@
     "visual": "水冷パイプが走る光るサイバーコートを羽織り、両手で空中に巨大なGPUクラスターとホログラムのデータストリームを操作するサイバーテック少女。",
     "motif": "GPUアクセラレータボード、緑色と青色の光ファイバーケーブル、水冷チューブ、浮遊するサーバーラック。",
     "color": "エレクトリックグリーン、ディープブラック、サイバーブルー。",
+    "reaction_win": "サーバーラックがフル稼働グリーンに輝き、両手のホログラムデータが青天井に急上昇！クールに眼鏡を押し上げながらニヤリ不敵な笑み（win.png）",
+    "reaction_loss": "サーバーラックが黄色アラート、通信遅延（Latency High）のポップアップに囲まれ、ジト目のまま眉間にしわを寄せてため息（loss.png）",
+    "reaction_sl": "水冷パイプが破裂して冷却水がプシャーと漏れ、サイバーコートが焦げて煙を吹き、GPUラックが真っ赤にオーバーヒートして頭を抱える（sl.png）",
     "source_file": "20261104_watchlist_candidates.md",
+    "images": {
+      "base": {
+        "exists": true,
+        "path": "output/39/3905/base.png",
+        "label": "通常",
+        "icon": "🌟"
+      },
+      "win": {
+        "exists": false,
+        "path": null,
+        "label": "利確",
+        "icon": "🏆"
+      },
+      "loss": {
+        "exists": false,
+        "path": null,
+        "label": "微損",
+        "icon": "💧"
+      },
+      "sl": {
+        "exists": false,
+        "path": null,
+        "label": "損切り",
+        "icon": "💥"
+      }
+    },
     "has_image": true,
     "image_path": "output/39/3905/base.png"
   },
@@ -644,7 +872,36 @@
     "visual": "光るデジタルの網（サイバーネット）を構え、あらゆる通信ログを追跡する虫眼鏡型スキャナを持つサイバースタイルの警備少女。",
     "motif": "光るデジタルの蜘蛛の巣（ネット）、ログ解析虫眼鏡スキャナ、南京錠アイコン、セキュリティシールド。",
     "color": "コバルトブルー、ネオンパープル、シルバー。",
+    "reaction_win": "サイバーネットで悪質な不正通信を一網打尽に捕獲完了！スキャナをクルッと回してウインク＆「完全ブロック、当然ね！」と勝ち誇る（win.png）",
+    "reaction_loss": "ログ解析に網をすり抜けられ、スキャナを覗き込みながら頬を膨らませて不服そうにジト目むくれ顔（loss.png）",
+    "reaction_sl": "防御ネットがビリビリに引き裂かれ、警備制服の袖や肩がほつれて煤汚れ、南京錠シールドが真っ二つに割れて「く、悔しい〜！」と地団駄（sl.png）",
     "source_file": "20261104_watchlist_candidates.md",
+    "images": {
+      "base": {
+        "exists": true,
+        "path": "output/42/4258/base.png",
+        "label": "通常",
+        "icon": "🌟"
+      },
+      "win": {
+        "exists": false,
+        "path": null,
+        "label": "利確",
+        "icon": "🏆"
+      },
+      "loss": {
+        "exists": false,
+        "path": null,
+        "label": "微損",
+        "icon": "💧"
+      },
+      "sl": {
+        "exists": false,
+        "path": null,
+        "label": "損切り",
+        "icon": "💥"
+      }
+    },
     "has_image": true,
     "image_path": "output/42/4258/base.png"
   },
@@ -658,7 +915,36 @@
     "visual": "金色のデジタル南京錠と鍵を胸に掲げ、胸元にペンギンのワッペンがついた騎士風のフォーマルスーツを着た凛々しい守護少女。",
     "motif": "暗号鍵（ゴールデンキー）、デジタル証明書の南京錠、認証スタンプ、Linuxペンギンモチーフ。",
     "color": "ロイヤルブルー、ゴールド、ピュアホワイト。",
+    "reaction_win": "ゴールデンキーが高らかに黄金の認証スタンプ（VERIFIED）を刻印！騎士スーツのマントを翻して堂々と胸を張る凛々しい勝利の敬礼（win.png）",
+    "reaction_loss": "認証キーがカチリと回らず保留マーク、騎士の剣先を地面に下ろして眉をひそめ静かに落ち込む（loss.png）",
+    "reaction_sl": "金色の暗号鍵がポキリと折れ、騎士スーツの胸当てにヒビが入りマントがボロボロに破け、ペンギンワッペンもススだらけになって膝をつく（sl.png）",
     "source_file": "20261104_watchlist_candidates.md",
+    "images": {
+      "base": {
+        "exists": true,
+        "path": "output/44/4498/base.png",
+        "label": "通常",
+        "icon": "🌟"
+      },
+      "win": {
+        "exists": false,
+        "path": null,
+        "label": "利確",
+        "icon": "🏆"
+      },
+      "loss": {
+        "exists": false,
+        "path": null,
+        "label": "微損",
+        "icon": "💧"
+      },
+      "sl": {
+        "exists": false,
+        "path": null,
+        "label": "損切り",
+        "icon": "💥"
+      }
+    },
     "has_image": true,
     "image_path": "output/44/4498/base.png"
   },
@@ -672,7 +958,36 @@
     "visual": "背中に大型バッテリーパックユニットを背負い、充電プラグ型のデバイスとケーブルを携えたメカニカルアーマー姿。",
     "motif": "超急速充電プラグ、蓄電池ブロック、電気スパーク、船の錨エンブレム。",
     "color": "エレクトリックイエロー、マットブラック、ネイビーブルー。",
+    "reaction_win": "背中のバッテリーが急速フル充電（100%緑ランプ）で眩しくスパーク！充電プラグを掲げてエネルギッシュな満面ガッツポーズ（win.png）",
+    "reaction_loss": "バッテリー残量赤点滅（10%）で電圧不足、力なく膝に手をついてトホホ顔（loss.png）",
+    "reaction_sl": "過負荷ショートで黒煙とパチパチ放電火花、ジャケットの裾が破けてバッテリーから煙を吹き、残量0%で真っ白に灰化ダウン（sl.png）",
     "source_file": "20261104_watchlist_candidates.md",
+    "images": {
+      "base": {
+        "exists": true,
+        "path": "output/48/485A/base.png",
+        "label": "通常",
+        "icon": "🌟"
+      },
+      "win": {
+        "exists": false,
+        "path": null,
+        "label": "利確",
+        "icon": "🏆"
+      },
+      "loss": {
+        "exists": false,
+        "path": null,
+        "label": "微損",
+        "icon": "💧"
+      },
+      "sl": {
+        "exists": false,
+        "path": null,
+        "label": "損切り",
+        "icon": "💥"
+      }
+    },
     "has_image": true,
     "image_path": "output/48/485A/base.png"
   },
@@ -686,7 +1001,36 @@
     "visual": "オペレーター用のヘッドセットを着け、複数の警戒レーダースクリーンを背に、サイバー迎撃シールドを展開するミリタリータクティカルスーツ少女。",
     "motif": "通信用ヘッドセット、レーダーホログラム、六角形の防御バリア（ヘキサゴンシールド）、警告アラートランプ。",
     "color": "タクティカルネイビー、クリムゾンレッド、ガンメタルグレー。",
+    "reaction_win": "ヘキサゴンシールドが敵の総攻撃を全弾跳ね返しノーダメージ迎撃成功！ヘッドセットを軽く押さえ「全脅威排除、任務完了だ」と誇らしげな微笑み（win.png）",
+    "reaction_loss": "迎撃シールドの一部に軽度の被弾、アラート音にチッと舌打ちしながらヘッドセットを押さえて警戒を強める（loss.png）",
+    "reaction_sl": "防衛シールドが粉々に砕け散り、タクティカルスーツが裂けて煙と火花が舞い、司令スクリーンが全てRED ALERTで埋まって悔し涙を呑む（sl.png）",
     "source_file": "20261104_watchlist_candidates.md",
+    "images": {
+      "base": {
+        "exists": true,
+        "path": "output/55/5599/base.png",
+        "label": "通常",
+        "icon": "🌟"
+      },
+      "win": {
+        "exists": false,
+        "path": null,
+        "label": "利確",
+        "icon": "🏆"
+      },
+      "loss": {
+        "exists": false,
+        "path": null,
+        "label": "微損",
+        "icon": "💧"
+      },
+      "sl": {
+        "exists": false,
+        "path": null,
+        "label": "損切り",
+        "icon": "💥"
+      }
+    },
     "has_image": true,
     "image_path": "output/55/5599/base.png"
   },
@@ -700,7 +1044,36 @@
     "visual": "半透明のサイバーバイザー（スマートグラス）を装着し、指先や周囲から細い光線（レーザービーム）を放つ近未来SFスタイル。白とシアン基調のフューチャリスティックスーツ。",
     "motif": "量子ドット（浮遊する微細な発光キューブ）、網膜投影レンズ、赤いレーザー光線。",
     "color": "ネオンレッド、サイバーシアン、白。",
+    "reaction_win": "バイザーに「TARGET CLEAR」のホログラムが浮かび、両手から鮮やかなレーザー祝砲を放ちながらドヤ顔ピース（win.png）",
+    "reaction_loss": "バイザーに「MISS...」と表示され、ツインテールがへにょんと垂れてしょんぼり涙目（loss.png）",
+    "reaction_sl": "バイザーにピキッとヒビが入り、レーザーユニットから黒煙、スーツの袖が少しほつれて照準ロストへたり込み（sl.png）",
     "source_file": "20261104_watchlist_candidates.md",
+    "images": {
+      "base": {
+        "exists": true,
+        "path": "output/66/6613/base.png",
+        "label": "通常",
+        "icon": "🌟"
+      },
+      "win": {
+        "exists": false,
+        "path": null,
+        "label": "利確",
+        "icon": "🏆"
+      },
+      "loss": {
+        "exists": false,
+        "path": null,
+        "label": "微損",
+        "icon": "💧"
+      },
+      "sl": {
+        "exists": false,
+        "path": null,
+        "label": "損切り",
+        "icon": "💥"
+      }
+    },
     "has_image": true,
     "image_path": "output/66/6613/base.png"
   }
@@ -708,10 +1081,12 @@
 
     let currentFilter = 'all';
     let searchQuery = '';
+    let currentModalItem = null;
+    let currentModalVariant = 'base';
 
-    const galleryGrid = document.getElementById('galleryGrid');
+    const cardsGrid = document.getElementById('cardsGrid');
     const searchInput = document.getElementById('searchInput');
-    const filterButtons = document.querySelectorAll('.filter-btn');
+    const filterButtons = document.querySelectorAll('.filter-tab');
     const badgeTotal = document.getElementById('badgeTotal');
     const countAll = document.getElementById('countAll');
     const countDone = document.getElementById('countDone');
@@ -747,67 +1122,75 @@
           item.code,
           item.name,
           item.concept,
+          item.corp,
           item.hair,
           item.eyes,
           item.visual,
           item.motif,
           item.color,
-          item.corp
-        ].join(' ').toLowerCase();
+          item.reaction_win,
+          item.reaction_loss,
+          item.reaction_sl
+        ].filter(Boolean).join(' ').toLowerCase();
 
         return textTarget.includes(q);
       });
 
       if (filtered.length === 0) {
-        galleryGrid.innerHTML = `
+        cardsGrid.innerHTML = `
           <div class="empty-state">
-            <p style="font-size: 2rem; margin-bottom: 8px;">🍂</p>
-            <p>該当する擬人化キャラが見つかりませんでした。</p>
+            <div style="font-size: 2.5rem; margin-bottom: 8px;">🔍</div>
+            <p>該当する銘柄が見つかりませんでした</p>
           </div>
         `;
         return;
       }
 
-      galleryGrid.innerHTML = filtered.map(item => {
+      cardsGrid.innerHTML = filtered.map(item => {
         const isDone = item.has_image;
-        const badgeHtml = isDone
-          ? `<span class="status-badge badge-done">生成済み</span>`
-          : `<span class="status-badge badge-waiting">生成待ち</span>`;
+        const badgeClass = isDone ? 'done' : 'waiting';
+        const badgeText = isDone ? '生成済み' : '生成待ち';
 
-        const imageHtml = isDone
-          ? `<img src="${item.image_path}" alt="${item.name}" class="card-img" loading="lazy">`
+        const thumbContent = isDone
+          ? `<img src="${item.image_path}" alt="${item.name}" loading="lazy">`
           : `
             <div class="placeholder-box">
               <div class="placeholder-icon">🎨</div>
               <div class="placeholder-text">ComfyUI 生成待ち</div>
-              <div class="placeholder-sub">メインPCで一括生成予定</div>
+              <div class="placeholder-sub">${item.code} base.png</div>
             </div>
           `;
 
         const colors = item.color ? item.color.split(/[、,]/).map(c => c.trim()).filter(Boolean) : [];
-        const colorTagsHtml = colors.map(c => `<span class="color-tag">${c}</span>`).join('');
+        const colorTagsHtml = colors.map(c => `<span class="color-tag">${c}</span>`).join(' ');
 
         return `
           <div class="card" onclick="openModal('${item.code}')">
-            <div class="card-img-wrapper">
-              ${badgeHtml}
-              ${imageHtml}
+            <div class="card-thumb-wrap">
+              <span class="status-badge ${badgeClass}">${badgeText}</span>
+              ${thumbContent}
             </div>
             <div class="card-body">
               <div class="card-header">
                 <span class="stock-code">${item.code}</span>
                 <span class="stock-name" title="${item.name}">${item.name}</span>
               </div>
-              <div class="card-concept">${item.concept || 'コンセプト未設定'}</div>
+              <div class="card-concept">
+                ${item.concept || 'コンセプト未設定'}
+              </div>
               <div class="card-details">
-                <div class="detail-row">
-                  <span class="detail-label">企業イメージ</span>
-                  <span class="detail-val">${item.corp || '—'}</span>
-                </div>
-                <div class="detail-row">
-                  <span class="detail-label">モチーフ</span>
-                  <span class="detail-val">${item.motif || '—'}</span>
-                </div>
+                ${item.hair ? `
+                  <div class="detail-row">
+                    <span class="detail-label">髪型:</span>
+                    <span class="detail-val">${item.hair}</span>
+                  </div>
+                ` : ''}
+                ${item.eyes ? `
+                  <div class="detail-row">
+                    <span class="detail-label">目・眉:</span>
+                    <span class="detail-val">${item.eyes}</span>
+                  </div>
+                ` : ''}
                 <div class="color-tags">
                   ${colorTagsHtml}
                 </div>
@@ -818,22 +1201,84 @@
       }).join('');
     }
 
+    function renderModalLeft() {
+      if (!currentModalItem) return;
+      const item = currentModalItem;
+      const v = currentModalVariant;
+      const imgInfo = item.images && item.images[v] ? item.images[v] : { exists: false, path: null };
+
+      // バリエーションメタ情報
+      const variants = [
+        { key: 'base', label: '通常', icon: '🌟', title: '購入時（通常）', desc: item.concept || '基準の決めポーズ' },
+        { key: 'win', label: '利確', icon: '🏆', title: '利確（勝ちリアクション）', desc: item.reaction_win || '利確リアクション未設定' },
+        { key: 'loss', label: '微損', icon: '💧', title: '微損（負けリアクション）', desc: item.reaction_loss || '負けリアクション未設定' },
+        { key: 'sl', label: '損切り', icon: '💥', title: '損切り（大負けリアクション）', desc: item.reaction_sl || '損切りリアクション未設定' }
+      ];
+
+      const activeVar = variants.find(x => x.key === v) || variants[0];
+
+      // タブ生成
+      const tabsHtml = variants.map(x => {
+        const exist = item.images && item.images[x.key] && item.images[x.key].exists;
+        const unreadyClass = exist ? '' : 'unready';
+        const activeClass = x.key === v ? 'active' : '';
+        return `
+          <button class="variant-btn ${activeClass} ${unreadyClass}" onclick="switchVariant('${x.key}')">
+            <span class="variant-dot"></span>
+            ${x.icon} ${x.label}
+          </button>
+        `;
+      }).join('');
+
+      // 画像エリア
+      const imgHtml = imgInfo.exists
+        ? `<img src="${imgInfo.path}" alt="${item.name} (${activeVar.label})">`
+        : `
+          <div class="placeholder-box" style="padding: 30px;">
+            <div class="placeholder-icon" style="font-size: 3.5rem;">🎨</div>
+            <div class="placeholder-text" style="font-size: 1rem; margin-top: 8px;">${activeVar.label}画像 生成待ち</div>
+            <div class="placeholder-sub" style="font-size: 0.8rem; margin-top: 4px;">
+              output/${item.code.slice(0, 2)}/${item.code}/${v === 'base' ? 'base' : v}.png
+            </div>
+          </div>
+        `;
+
+      modalLeft.innerHTML = `
+        <div class="variant-tabs">
+          ${tabsHtml}
+        </div>
+        <div class="modal-img-wrapper" id="modalImgWrapper">
+          ${imgHtml}
+        </div>
+        <div class="modal-reaction-card">
+          <div class="modal-reaction-title" style="color: var(--accent);">
+            ${activeVar.icon} ${activeVar.title}
+          </div>
+          <div>${activeVar.desc}</div>
+        </div>
+        ${imgInfo.exists ? `
+          <div style="font-size: 0.78rem;">
+            <a href="${imgInfo.path}" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 700;">
+              ↗ 画像を直接開く (${imgInfo.path})
+            </a>
+          </div>
+        ` : ''}
+      `;
+    }
+
+    function switchVariant(varKey) {
+      currentModalVariant = varKey;
+      renderModalLeft();
+    }
+
     function openModal(code) {
       const item = STOCKS_DATA.find(s => s.code === code);
       if (!item) return;
 
-      const isDone = item.has_image;
-      modalLeft.innerHTML = isDone
-        ? `<img src="${item.image_path}" alt="${item.name}">`
-        : `
-          <div class="placeholder-box" style="padding: 40px;">
-            <div class="placeholder-icon" style="font-size: 4rem;">🎨</div>
-            <div class="placeholder-text" style="font-size: 1.1rem; margin-top: 12px;">ComfyUI 生成待ち</div>
-            <div class="placeholder-sub" style="font-size: 0.85rem; margin-top: 6px;">
-              メインPCで <code>python make_base.py ${item.code}</code> を実行すると生成されます
-            </div>
-          </div>
-        `;
+      currentModalItem = item;
+      currentModalVariant = 'base';
+
+      renderModalLeft();
 
       const colors = item.color ? item.color.split(/[、,]/).map(c => c.trim()).filter(Boolean) : [];
       const colorTagsHtml = colors.map(c => `<span class="color-tag" style="padding: 4px 10px; font-size: 0.8rem;">${c}</span>`).join(' ');
@@ -883,13 +1328,23 @@
           </div>
         </div>
 
-        ${isDone ? `
-          <div style="margin-top: 10px;">
-            <a href="${item.image_path}" target="_blank" style="color: var(--accent); font-size: 0.85rem; text-decoration: none; font-weight: 700;">
-              ↗ 画像を直接開く (${item.image_path})
-            </a>
+        <div>
+          <div class="modal-section-title">🎭 取引リアクション設定</div>
+          <div class="reaction-list">
+            <div class="reaction-item">
+              <div class="reaction-item-title" style="color: #4ade80;">🏆 利確（勝ち）</div>
+              <div style="color: #cbd5e1;">${item.reaction_win || '未設定'}</div>
+            </div>
+            <div class="reaction-item">
+              <div class="reaction-item-title" style="color: #38bdf8;">💧 通常負け（微損）</div>
+              <div style="color: #cbd5e1;">${item.reaction_loss || '未設定'}</div>
+            </div>
+            <div class="reaction-item">
+              <div class="reaction-item-title" style="color: #f87171;">💥 損切り（大負け・服破れ/煤/破損）</div>
+              <div style="color: #cbd5e1;">${item.reaction_sl || '未設定'}</div>
+            </div>
           </div>
-        ` : ''}
+        </div>
       `;
 
       modalOverlay.classList.add('active');
@@ -897,6 +1352,7 @@
 
     function closeModal() {
       modalOverlay.classList.remove('active');
+      currentModalItem = null;
     }
 
     modalClose.addEventListener('click', closeModal);
