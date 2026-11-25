@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>銘柄擬人化ちびキャラギャラリー | Image Master</title>
+  <title>銘柄擬人化ちびキャラギャラリー</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -44,7 +44,6 @@
       flex-direction: column;
     }
 
-    /* ヘッダー */
     header {
       background: rgba(24, 32, 44, 0.8);
       backdrop-filter: blur(12px);
@@ -97,7 +96,6 @@
       font-family: var(--font-code);
     }
 
-    /* 検索・フィルターバー */
     .controls-area {
       display: flex;
       flex-wrap: wrap;
@@ -175,7 +173,6 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.3);
     }
 
-    /* メインコンテナ */
     main {
       max-width: 1400px;
       width: 100%;
@@ -184,7 +181,6 @@
       flex: 1;
     }
 
-    /* カードグリッド */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -209,7 +205,6 @@
       box-shadow: 0 12px 24px -10px rgba(56, 189, 248, 0.25);
     }
 
-    /* サムネイルエリア */
     .card-thumb-wrap {
       width: 100%;
       height: 240px;
@@ -234,7 +229,6 @@
       transform: scale(1.05);
     }
 
-    /* プレースホルダー */
     .placeholder-box {
       text-align: center;
       padding: 24px;
@@ -258,7 +252,6 @@
       margin-top: 4px;
     }
 
-    /* バッジ */
     .status-badge {
       position: absolute;
       top: 12px;
@@ -302,7 +295,6 @@
       background: #fbbf24;
     }
 
-    /* カード詳細本文 */
     .card-body {
       padding: 18px;
       display: flex;
@@ -393,7 +385,6 @@
       color: #cbd5e1;
     }
 
-    /* モーダル */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -463,7 +454,6 @@
       transform: scale(1.05);
     }
 
-    /* モーダル左側（画像＋切り替えタブ） */
     .modal-left {
       flex: 1.1;
       background: #090d13;
@@ -481,7 +471,7 @@
       .modal-left {
         border-right: none;
         border-bottom: 1px solid var(--card-border);
-        padding: 56px 16px 20px; /* 上部に閉じるボタン用の余白を確保 */
+        padding: 56px 16px 20px;
       }
     }
 
@@ -582,28 +572,6 @@
       }
     }
 
-    .modal-reaction-card {
-      width: 100%;
-      background: #131b26;
-      border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 10px 14px;
-      font-size: 0.82rem;
-      color: #cbd5e1;
-      line-height: 1.45;
-    }
-
-    .modal-reaction-title {
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* モーダル右側 */
     .modal-right {
       flex: 1.3;
       padding: 28px;
@@ -662,7 +630,6 @@
       margin-bottom: 2px;
     }
 
-    /* 空状態 */
     .empty-state {
       text-align: center;
       padding: 60px 20px;
@@ -670,7 +637,6 @@
       grid-column: 1 / -1;
     }
 
-    /* フッター */
     footer {
       border-top: 1px solid var(--card-border);
       padding: 16px 24px;
@@ -706,25 +672,18 @@
   </header>
 
   <main>
-    <div class="cards-grid" id="cardsGrid">
-      <!-- JavaScriptで動的生成 -->
-    </div>
+    <div class="cards-grid" id="cardsGrid"></div>
   </main>
 
   <footer>
-    <p>Image Master Repository &bull; ComfyUI Chibi Character Generator Pipeline</p>
+    <p>Stock Chibi Gallery &bull; ComfyUI Chibi Character Generator Pipeline</p>
   </footer>
 
-  <!-- 詳細モーダル -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
       <button class="modal-close" id="modalClose">&times;</button>
-      <div class="modal-left" id="modalLeft">
-        <!-- バリエーションタブ、画像、リアクション説明 -->
-      </div>
-      <div class="modal-right" id="modalRight">
-        <!-- 詳細テキスト -->
-      </div>
+      <div class="modal-left" id="modalLeft"></div>
+      <div class="modal-right" id="modalRight"></div>
     </div>
   </div>
 
@@ -904,7 +863,7 @@
   },
   {
     "code": "219A",
-    "name": "Ｈｅａｒｔｓｅｅｄ",
+    "name": "Heartseed",
     "corp": "慶應大発バイオ。iPS細胞から作った微小組織「心筋球」を心臓に直接移植し、心機能を根本再生させる最先端心臓再生医療。",
     "concept": "命の種を宿すバイオテック・ヒーラー",
     "hair": "ふんわりと柔らかく波打つ淡いピンクのウェーブロング（片側を肩に掛けたサイドスタイル、心筋球を模したハート型ヘアピン留め）",
@@ -1119,7 +1078,7 @@
   },
   {
     "code": "278A",
-    "name": "Ｔｅｒｒａ　Ｄｒｏｎｅ",
+    "name": "Terra Drone",
     "corp": "世界トップクラスの産業用ドローンソリューションおよび無人航空機運航管理システム（UTM）プロバイダー。石油・ガス・化学プラントの高所・閉所点検、LiDAR測量、防衛・迎撃ドローン、そして「空飛ぶクルマ」を含む空の次世代デジタル管制インフラをグローバルに展開する。",
     "concept": "地球の空を統合管制するフューチャー・ドローンコマンダー",
     "hair": "空を飛ぶ風を思わせるスカイブルー＆ディープネイビーのグラデーション・ショートウルフカット。頭部にはドローンの4枚プロペラ（クアッドローター）を小型化したカチューシャ型ホログラムアンテナ。",
@@ -1162,7 +1121,7 @@
   },
   {
     "code": "2980",
-    "name": "ＳＲＥホールディングス",
+    "name": "SREホールディングス",
     "corp": "ソニーグループ発のライフテック企業。「AI×リアル（実業）」の一気通貫モデルを強みに、不動産・金融・ヘルスケア向けAIクラウド＆コンサルティングと、不動産仲介・アセットマネジメント等のリアル事業を展開する。",
     "concept": "都市空間とAIクラウドを結び、価値を最適化するスマート・ライフテック少女",
     "hair": "清潔感のあるプラチナシルバーの前下がりボブ（inverted bob）に、内側へコバルトブルーのインナーカラー（inner color hair）と、頭頂部に情報受信を表す小さなアンテナ状のアホ毛（antenna hair）。",
@@ -1248,7 +1207,7 @@
   },
   {
     "code": "3086",
-    "name": "Ｊ．フロント　リテイリング",
+    "name": "J.フロント リテイリング",
     "corp": "大丸、松坂屋、PARCO（パルコ）、GINZA SIXなどを展開する総合リテール・複合商業施設グループ。300年以上の歴史を誇る老舗百貨店の伝統とおもてなし文化に、パルコの先鋭的なカルチャー・アート・若者トレンドを融合させた独自のプレミアム体験を創出する。",
     "concept": "伝統の老舗百貨店と最先端パルコカルチャーを掛け合わせたハイブリッド・コンシェルジュプリンセス",
     "hair": "エレガントなウェーブロング（上品なダークブラウンに、毛先へ向けてパルコカルチャーを思わせるネオンパステルカラーのインナーメッシュが入っている）。孔雀（ピーコック）の羽を模した高級感あるヘアクリップ。",
@@ -1420,7 +1379,7 @@
   },
   {
     "code": "325A",
-    "name": "ＴＥＮＴＩＡＬ",
+    "name": "TENTIAL",
     "corp": "特殊機能繊維による血行促進効果を持つ一般医療機器のリカバリーウェア「BAKUNE」シリーズや高機能寝具を展開するコンディショニングブランド。睡眠・ウェルネス市場を牽引する急成長企業。",
     "concept": "極上の安眠でポテンシャルを引き出すリカバリー少女",
     "hair": "落ち着いたラベンダーグレーの内巻きふんわりボブ（ナイトキャップ風の小さなリボン付き）",
@@ -1506,7 +1465,7 @@
   },
   {
     "code": "338A",
-    "name": "ＺｅｎｍｕＴｅｃｈ",
+    "name": "ZenmuTech",
     "corp": "暗号鍵を使わずデータを意味のない複数の断片に分割・無意味化して守る独自の「秘密分散技術（AONT方式）」を軸に、情報漏洩対策ソリューションや秘密計算技術を展開するセキュリティ企業。",
     "concept": "データを無意味な断片へ分解して守り抜く秘密分散エージェント少女",
     "hair": "クールなシルバーグレーにシアンブルーのインナーカラーを入れたアシンメトリーショート（片目を少し覆うミステリアスな前髪）",
@@ -1592,7 +1551,7 @@
   },
   {
     "code": "3436",
-    "name": "ＳＵＭＣＯ",
+    "name": "SUMCO",
     "corp": "半導体基板となるシリコンウェーハの世界トップクラス専業メーカー。AIやデータセンター向け最先端ロジック半導体用300mmエピタキシャルウェーハで圧倒的な世界シェアと特許技術力を誇る。",
     "concept": "極限の鏡面を磨き上げる高純度クリスタル少女",
     "hair": "透き通るような銀髪（シルバー）のストレートロング・姫カット（毛先にプリズム風の淡い虹色光沢）",
@@ -1678,7 +1637,7 @@
   },
   {
     "code": "3491",
-    "name": "ＧＡ　ｔｅｃｈｎｏｌｏｇｉｅｓ",
+    "name": "GA technologies",
     "corp": "AIやテクノロジーを活用したネット不動産投資サービス「RENOSY（リノシー）」や、不動産業界向けSaaS「ITANDI（イタンジ）」を展開するPropTech企業。物件選定から購入・管理・売却までをデジタルで一気通貫させる。",
     "concept": "住まいと資産形成をスマートに繋ぐネット不動産少女",
     "hair": "軽快で親しみやすい外ハネショート（明るいライトブラウンの髪にクリアブルーのインナーカラー入り、小さな家型のヘアピン留め）",
@@ -1721,7 +1680,7 @@
   },
   {
     "code": "3563",
-    "name": "ＦＯＯＤ　＆　ＬＩＦＥ　ＣＯＭＰＡＮＩＥＳ",
+    "name": "FOOD & LIFE COMPANIES",
     "corp": "回転寿司首位「スシロー」や「京樽」「杉玉」を国内外に展開するフードサービスグループ。海と大地の恵みをテーマにグローバル出店を加速。",
     "concept": "世界へおいしい笑顔を届ける回転寿司看板娘",
     "hair": "艶のある黒髪のダブルお団子ヘア（お団子カバーは赤と白の寿司皿モチーフの飾り付き）",
@@ -1764,7 +1723,7 @@
   },
   {
     "code": "3697",
-    "name": "ＳＨＩＦＴ",
+    "name": "SHIFT",
     "corp": "ソフトウェアテスト・品質保証のパイオニアであり、バグを未然に防ぎシステムの高品質化とDXを総合支援する業界リーダー。",
     "concept": "すべてのバグを洗い流し品質を極めるパーフェクトQAエンジニア",
     "hair": "几帳面できっちり編み込まれたエメラルドグリーングラデーションのツインブレイド（おさげ三つ編み）",
@@ -2280,7 +2239,7 @@
   },
   {
     "code": "4418",
-    "name": "ＪＤＳＣ",
+    "name": "JDSC",
     "corp": "「UPGRADE JAPAN」を掲げる東大発のAIテックカンパニー。産業特化型AIソリューション、需要予測・物流最適化、さらにロボット制御などのフィジカルAIまで、現場への実装力を強みにDX・AXを推進する。",
     "concept": "産業の核心をAIで実装・最適化する冷徹ロジカル少女",
     "hair": "鋭敏さと知性を象徴するシャープなアシンメトリーショート（クールな黒髪に、片側の前髪へ白銀のメッシュ入り）",
@@ -2323,7 +2282,7 @@
   },
   {
     "code": "4419",
-    "name": "Ｆｉｎａｔｅｘｔホールディングス",
+    "name": "Finatextホールディングス",
     "corp": "「金融を“サービス”として再発明する」を掲げ、証券・保険・クレジットのクラウド基幹システム（BaaS）やビッグデータ解析（ナウキャスト）を提供するフィンテック企業。金融の“黒子”として協業を支える。",
     "concept": "次世代クラウド金融基盤を裏から支えるスマート黒子少女",
     "hair": "艶やかな漆黒の前下がりボブ（毛先に淡いシャンパンゴールドのグラデーションと、シンプルな金色のヘアクリップ付き）",
@@ -2366,7 +2325,7 @@
   },
   {
     "code": "4443",
-    "name": "Ｓａｎｓａｎ",
+    "name": "Sansan",
     "corp": "クラウド名刺管理・営業DX「Sansan」で圧倒的国内シェアを誇るリーディングカンパニー。「ビジネスの出会いを資産に変え、働き方を革新する」をミッションに、請求書受領クラウド「Bill One」や契約DX「Contract One」、名刺アプリ「Eight」など、AIと独自の高精度データ化技術を駆使して企業内のアナログ情報を構造化・資産化する営業・経理・契約AX（AIトランスフォーメーション）サービスを展開する。",
     "concept": "出会いを資産に変えビジネスの結びつきを紡ぐスマートコネクトナビゲーター",
     "hair": "知性と清潔感あふれる黒髪ベースのハーフアップ・ショートボブ。内側に鮮烈なサンサンレッドのインナーカラーが覗き、後頭部の結び目には出会いの赤い糸を象徴するミニマルな赤のコネクトバレッタ（水引風ヘアクリップ）を装着。",
@@ -2452,7 +2411,7 @@
   },
   {
     "code": "4475",
-    "name": "ＨＥＮＮＧＥ",
+    "name": "HENNGE",
     "corp": "クラウドセキュリティSaaS国内シェアNo.1の「HENNGE One」を展開。ID認証・シングルサインオン（SSO）や脱PPAP・メールセキュリティを提供し、「テクノロジーの解放で世の中を変えていく」をビジョンに企業のクラウド変革（変化＝HENNKA）を支援する。",
     "concept": "あらゆるクラウドへの扉を鍵とシールドで守るサイバーセキュリティガーディアン",
     "hair": "前下がりアシメショートボブ（ダークネイビーブルーの髪に毛先・インナーに鮮烈なビビッドオレンジのメッシュ、頭の側面に「H」をかたどった光るデジタルヘアクリップ）",
@@ -2538,7 +2497,7 @@
   },
   {
     "code": "4483",
-    "name": "ＪＭＤＣ",
+    "name": "JMDC",
     "corp": "レセプトデータや健診データなど日本最大級のヘルスケアデータベースを基盤に、医療ビッグデータ解析やPHRアプリ「PepUp」を展開する医療DXのパイオニア（オムロングループ）。匿名加工データを活用した製薬研究支援や保険者支援を通じて、医療費適正化と健康増進をデータサイエンスで牽引する。",
     "concept": "膨大な健康データから未来の未病を予測するメディカルデータアナリスト",
     "hair": "清楚で清潔感あふれるペールアクア（淡い青緑）のふんわりローポニーテール。前髪はすっきりと流し、サイドにDNAの二重螺旋をかたどったシルバーのヘアクリップ。",
@@ -2753,7 +2712,7 @@
   },
   {
     "code": "456A",
-    "name": "ＨＵＭＡＮ　ＭＡＤＥ",
+    "name": "HUMAN MADE",
     "corp": "カリスマクリエイターNIGO®が創設した世界的ストリートライフスタイルブランド。「The Future Is In The Past（未来は過去にある）」を掲げ、アイコニックな赤いハートや動物グラフィック（シロクマ、カモ等）とヴィンテージ×現代ストリートを融合。",
     "concept": "ヴィンテージと未来を繋ぐストリートカルチャーのアイコンガール",
     "hair": "トレンド感抜群の切りっぱなし外ハネボブ（ミルクティーベージュ、内側にヴィンテージレッドのインナーカラー、頭にはブランドロゴ入りのストリートキャップ）",
@@ -2925,7 +2884,7 @@
   },
   {
     "code": "5016",
-    "name": "ＪＸ金属",
+    "name": "JX金属",
     "corp": "銅の資源開発・製錬から、半導体用スパッタリングターゲットやFPC向け圧延銅箔など世界トップシェアを誇る先端素材製造、さらに都市鉱山からのゼロエミッション型リサイクルまでを一貫して手掛ける非鉄金属のリーディングカンパニー。",
     "concept": "資源と先端半導体素材を循環・精製する精錬マイスター少女",
     "hair": "艶やかなカッパーオレンジ（銅色）の髪を高い位置でまとめた大きなお団子ヘア（毛先にゴールドのグラデーションを入れ、金属製の簪風ピンで留めている）",
@@ -2968,7 +2927,7 @@
   },
   {
     "code": "5599",
-    "name": "Ｓ＆Ｊ",
+    "name": "S&J",
     "corp": "24時間365日体制のセキュリティ監視（SOC）と、高度なサイバー攻撃・インシデントへの迎撃・防御を専門に行うサイバー防衛企業。",
     "concept": "24時間体制でサイバー攻撃を迎撃するSOC防衛指令官",
     "hair": "ヘッドセットを装着しやすい、すっきりまとめたダークネイビーのお団子ヘア（シニヨン）（襟足はシャープに整えられた軍事オペレーター調）",
@@ -3183,7 +3142,7 @@
   },
   {
     "code": "5805",
-    "name": "ＳＷＣＣ",
+    "name": "SWCC",
     "corp": "90年以上の歴史を持つ電線・ケーブル大手（旧・昭和電線）。電力インフラを支える超高圧ケーブルや戦略接続部品「SICONEX」、高機能無酸素銅「MiDIP」、AIデータセンター・EV向け製品を手掛ける。",
     "concept": "社会の大動脈を繋ぐ情熱の電力ケーブルエンジニア少女",
     "hair": "機動力と職人気質を表すシャープなハイポニーテール（引き締まったダークグレーの髪に、銅線のようなカッパーオレンジのインナーカラー）",
@@ -3226,7 +3185,7 @@
   },
   {
     "code": "581A",
-    "name": "ＧＯ",
+    "name": "GO",
     "corp": "国内最大級のタクシー配車アプリ「GO」を中核にモビリティDXを牽引する企業。AI需要予測による配車や車内サイネージ広告、EV充電決済「GO Charge」、自動運転タクシーの実証など移動インフラを担う。",
     "concept": "街の移動を最速で繋ぐスマート配車ナビ少女",
     "hair": "鮮やかなライトブルーのピクシーショートに、GPSアンテナのようにぴょこんと立ったアホ毛",
@@ -3398,7 +3357,7 @@
   },
   {
     "code": "6036",
-    "name": "ＫｅｅＰｅｒ技研",
+    "name": "KeePer技研",
     "corp": "自動車用カーコーティング剤・洗車ケミカルの研究開発・製造から、直営店「KeePer LABO」や全国「KeePer PRO SHOP」網を展開するカーコーティングのリーディングカンパニー。",
     "concept": "愛車に極上の輝きを纏わせるカーコーティング職人少女",
     "hair": "艶やかなアクアブルーの外ハネショートボブ（毛先にクリスタルのような透明感ある水色グラデーション、前髪を白いヘアピンで留めた快活なスタイル）",
@@ -3613,7 +3572,7 @@
   },
   {
     "code": "618A",
-    "name": "ＫＯＭＰＥＩＴＯ",
+    "name": "KOMPEITO",
     "corp": "オフィス設置型健康社食サービス「OFFICE DE YASAI（オフィスでやさい）」を展開。オフィスワーカーへ手軽で新鮮な野菜・フルーツ・惣菜を届け、健康経営と福利厚生を支援。オフィス内自販機「SALAD STAND」やサンプリングメディアも手掛け、社内に笑顔とビタミンを補給する。",
     "concept": "オフィスへフレッシュな野菜と笑顔を届けるビタミン・オフィスデリバリーガール",
     "hair": "鮮やかなフレッシュグリーンとキャロットオレンジのインナーカラーが入った元気いっぱいのハイツインテール。ツインテールの結び目には、色とりどりの金平糖（kompeito）をかたどった星型シュガーゴム。",
@@ -3699,7 +3658,7 @@
   },
   {
     "code": "6227",
-    "name": "ＡＩメカテック",
+    "name": "AIメカテック",
     "corp": "半導体の薄化ウェハを支え・剥離するウェハハンドリングシステム（TB/DB装置）や、微細塗布を行うインクジェット（IJP）装置で世界から注目される先端装置メーカー。",
     "concept": "極薄ウェハを傷つけず操る精密ハンドリング少女",
     "hair": "鋭敏で未来的な銀髪のウルフカット（毛先にシアンブルーのインナーカラー）",
@@ -3828,7 +3787,7 @@
   },
   {
     "code": "627A",
-    "name": "ａｋｉｐｐａ",
+    "name": "akippa",
     "corp": "個人宅の空き車庫や遊休地を15分単位・1日単位で貸し借りできる駐車場マーケットプレイス「akippa」を運営。アセットライトで急成長。",
     "concept": "街のすき間を便利に変える笑顔のパーキング案内少女",
     "hair": "元気で親しみやすいライトブラウンの外ハネショート（トップに「P」マーク風の緑のピン留めと小さなアホ毛）",
@@ -3871,7 +3830,7 @@
   },
   {
     "code": "6315",
-    "name": "ＴＯＷＡ",
+    "name": "TOWA",
     "corp": "半導体後工程の「モールディング（樹脂封止）装置」および超精密金型で世界トップシェアを誇る京都発の精密装置メーカー。生成AIの普及で需要が急拡大する「HBM（高帯域幅メモリ）」の超微細隙間充填・封止（コンプレッションモールディング・MUF技術）において圧倒的な独占的地位を確立している。",
     "concept": "ミクロン単位の精密金型と樹脂封止でAI半導体を守護するナノモールドマイスター",
     "hair": "伝統とハイテクが融合したインディゴネイビー（藍色）のストレートボブ（姫カットニュアンス）。後頭部で京都の職人を思わせる小さな金色の簪（かんざし）を挿している。",
@@ -4129,7 +4088,7 @@
   },
   {
     "code": "6523",
-    "name": "ＰＨＣホールディングス",
+    "name": "PHCホールディングス",
     "corp": "血糖自己測定器（BGM）で世界的高シェアを誇り、電子カルテ「メディコム」、臨床検査、病理検査機器、研究用超低温フリーザー（PHCbi）までを展開する精密ヘルスケア企業グループ。",
     "concept": "精緻なバイオ技術で命に寄り添うメディカルケア少女",
     "hair": "優しさと信頼感・清潔感のある内巻きふんわりボブ（パールホワイトの髪に、赤い十字ラインが入ったナースキャップ風カチューシャ）",
@@ -4172,7 +4131,7 @@
   },
   {
     "code": "6525",
-    "name": "ＫＯＫＵＳＡＩ　ＥＬＥＣＴＲＩＣ",
+    "name": "KOKUSAI ELECTRIC",
     "corp": "半導体製造装置の世界的リーダー。ウエハを一度に数十〜百枚単位で熱処理成膜する縦型バッチ式CVD/ALD装置や、成膜後の膜質改善を行うトリートメント（プラズマ窒化・酸化）装置で世界トップシェアを誇る。3D NANDの超多層化や先端DRAM・ロジックの極限成膜プロセスを支える。",
     "concept": "灼熱の縦型炉で原子層レベルの均一薄膜を焼き上げる熱・成膜ファーネス・マイスター",
     "hair": "燃えるような炉内の熱気を宿すルビーレッドからオレンジへのグラデーション・ウェーブボブ（ふんわりと丸みを帯びた耐熱シルエット）。髪留めには石英ガラス管を模したクリアクリップ。",
@@ -4344,7 +4303,7 @@
   },
   {
     "code": "6613",
-    "name": "ＱＤレーザ",
+    "name": "QDレーザ",
     "corp": "世界初の量子ドット半導体レーザ量産技術と、網膜に直接映像を描画するスマートグラス（RETISSA）を展開する先端光学ディープテック。",
     "concept": "光と視界を拡張するサイバーアイ少女",
     "hair": "水色グラデーションの入った白髪のサイバーツインテール（毛先に光ファイバー調のネオンレッド発光ライン）",
@@ -4430,7 +4389,7 @@
   },
   {
     "code": "6668",
-    "name": "アドテック　プラズマ　テクノロジー",
+    "name": "アドテック プラズマ テクノロジー",
     "corp": "半導体・液晶・太陽電池製造装置向け高周波（RF）プラズマ電源、およびインピーダンス自動整合器（マッチングボックス）の専業メーカー。プラズマを安定励起させるための高精度な電源制御と、ミリ秒単位で負荷変動に追従する高速インピーダンス整合技術で世界の半導体装置メーカーに供給。",
     "concept": "荒ぶるプラズマをミリ秒で完璧に調律する高周波（RF）パルス・マエストロ",
     "hair": "プラズマの放電スパークを思わせるエレクトリックバイオレット（紫電色）のアシンメトリーショート（左サイドが短く、右サイドに稲妻のようなシャープなハネ）。耳元に高周波同軸コネクタ風のイヤーカフ。",
@@ -4473,7 +4432,7 @@
   },
   {
     "code": "6752",
-    "name": "パナソニック　ホールディングス",
+    "name": "パナソニック ホールディングス",
     "corp": "1918年創業の総合電機大手。EV向け車載リチウムイオン電池や産業用蓄電池などの「エナジー事業」、白物・空調の「くらし事業」、BtoB現場DXの「コネクト」、電子部品の「インダストリー」等を統括する。コーポレートカラーは夜明けの空を象徴する「パナソニック ブルー」。",
     "concept": "暮らしからEV・産業まで電力を届ける総合エナジー・チャレンジャー少女",
     "hair": "活発でリーダーシップを感じさせるディープブルーのハイポニーテール。毛先に蓄電エネルギーを思わせるエナジーイエローのグラデーションが入っている。",
@@ -4559,7 +4518,7 @@
   },
   {
     "code": "6762",
-    "name": "ＴＤＫ",
+    "name": "TDK",
     "corp": "磁性材料「フェライト」を祖業に、積層セラミックコンデンサ（MLCC）、二次電池、各種センサ、HDD用磁気ヘッドなどを世界展開する総合電子部品メーカー。近年はTDKブルーからマゼンタ・グリーンへ移行するグラデーションをブランドカラーに採用。",
     "concept": "磁気とエナジーの波を操るグローバル・エレクトロニクス少女",
     "hair": "クールで洗練されたアシンメトリーショート（深いTDKブルーをベースに、マゼンタとエメラルドグリーンのグラデーションインナーカラー）",
@@ -5161,7 +5120,7 @@
   },
   {
     "code": "6999",
-    "name": "ＫＯＡ",
+    "name": "KOA",
     "corp": "固定抵抗器で世界トップクラスのシェアを誇る電子部品大手。車載ECUやバッテリーマネジメント（xEV）向けに高精度シャント抵抗器や耐サージ抵抗器を供給。長野県伊那谷に根ざし「農工一体」「地球に感謝」を経営理念に掲げ、エレクトロニクス回路の電流を精密に計測・保護する。",
     "concept": "大自然の調和の中で回路の電流を守り測る伊那谷のレジスター・ガーディアン",
     "hair": "落ち着いたダークフォレストグリーン（深緑）のふんわりローツイン三つ編み（毛先をおさげにして前に垂らす）。髪留めには電子回路のカラーコード（抵抗値を示すカラーバンド）を模したリングゴム。",
@@ -5781,6 +5740,15 @@
     const modalLeft = document.getElementById('modalLeft');
     const modalRight = document.getElementById('modalRight');
 
+    function esc(v) {
+      return String(v ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
     function updateCounts() {
       const total = STOCKS_DATA.length;
       const done = STOCKS_DATA.filter(s => s.has_image).length;
@@ -5796,11 +5764,9 @@
       const q = searchQuery.toLowerCase().trim();
 
       const filtered = STOCKS_DATA.filter(item => {
-        // ステータスフィルター
         if (currentFilter === 'done' && !item.has_image) return false;
         if (currentFilter === 'waiting' && item.has_image) return false;
 
-        // 検索フィルター
         if (!q) return true;
         const textTarget = [
           item.code,
@@ -5834,45 +5800,47 @@
         const isDone = item.has_image;
         const badgeClass = isDone ? 'done' : 'waiting';
         const badgeText = isDone ? '生成済み' : '生成待ち';
+        const codeEsc = esc(item.code);
+        const nameEsc = esc(item.name);
 
         const thumbContent = isDone
-          ? `<img src="${item.image_path}" alt="${item.name}" loading="lazy">`
+          ? `<img src="${esc(item.image_path)}" alt="${nameEsc}" loading="lazy">`
           : `
             <div class="placeholder-box">
               <div class="placeholder-icon">🎨</div>
               <div class="placeholder-text">ComfyUI 生成待ち</div>
-              <div class="placeholder-sub">${item.code} base.png</div>
+              <div class="placeholder-sub">${codeEsc} base.png</div>
             </div>
           `;
 
         const colors = item.color ? item.color.split(/[、,]/).map(c => c.trim()).filter(Boolean) : [];
-        const colorTagsHtml = colors.map(c => `<span class="color-tag">${c}</span>`).join(' ');
+        const colorTagsHtml = colors.map(c => `<span class="color-tag">${esc(c)}</span>`).join(' ');
 
         return `
-          <div class="card" onclick="openModal('${item.code}')">
+          <div class="card" onclick="openModal('${codeEsc}')">
             <div class="card-thumb-wrap">
               <span class="status-badge ${badgeClass}">${badgeText}</span>
               ${thumbContent}
             </div>
             <div class="card-body">
               <div class="card-header">
-                <span class="stock-code">${item.code}</span>
-                <span class="stock-name" title="${item.name}">${item.name}</span>
+                <span class="stock-code">${codeEsc}</span>
+                <span class="stock-name" title="${nameEsc}">${nameEsc}</span>
               </div>
               <div class="card-concept">
-                ${item.concept || 'コンセプト未設定'}
+                ${esc(item.concept || 'コンセプト未設定')}
               </div>
               <div class="card-details">
                 ${item.hair ? `
                   <div class="detail-row">
                     <span class="detail-label">髪型:</span>
-                    <span class="detail-val">${item.hair}</span>
+                    <span class="detail-val">${esc(item.hair)}</span>
                   </div>
                 ` : ''}
                 ${item.eyes ? `
                   <div class="detail-row">
                     <span class="detail-label">目・眉:</span>
-                    <span class="detail-val">${item.eyes}</span>
+                    <span class="detail-val">${esc(item.eyes)}</span>
                   </div>
                 ` : ''}
                 <div class="color-tags">
@@ -5891,17 +5859,15 @@
       const v = currentModalVariant;
       const imgInfo = item.images && item.images[v] ? item.images[v] : { exists: false, path: null };
 
-      // バリエーションメタ情報
       const variants = [
-        { key: 'base', label: '通常', icon: '🌟', title: '購入時（通常）', desc: item.concept || '基準の決めポーズ' },
-        { key: 'win', label: '利確', icon: '🏆', title: '利確（勝ちリアクション）', desc: item.reaction_win || '利確リアクション未設定' },
-        { key: 'loss', label: '微損', icon: '💧', title: '微損（負けリアクション）', desc: item.reaction_loss || '負けリアクション未設定' },
-        { key: 'sl', label: '損切り', icon: '💥', title: '損切り（大負けリアクション）', desc: item.reaction_sl || '損切りリアクション未設定' }
+        { key: 'base', label: '通常', icon: '🌟' },
+        { key: 'win', label: '利確', icon: '🏆' },
+        { key: 'loss', label: '微損', icon: '💧' },
+        { key: 'sl', label: '損切り', icon: '💥' }
       ];
 
       const activeVar = variants.find(x => x.key === v) || variants[0];
 
-      // タブ生成
       const tabsHtml = variants.map(x => {
         const exist = item.images && item.images[x.key] && item.images[x.key].exists;
         const unreadyClass = exist ? '' : 'unready';
@@ -5914,15 +5880,14 @@
         `;
       }).join('');
 
-      // 画像エリア
       const imgHtml = imgInfo.exists
-        ? `<img src="${imgInfo.path}" alt="${item.name} (${activeVar.label})">`
+        ? `<img src="${esc(imgInfo.path)}" alt="${esc(item.name)} (${activeVar.label})">`
         : `
           <div class="placeholder-box" style="padding: 30px;">
             <div class="placeholder-icon" style="font-size: 3.5rem;">🎨</div>
             <div class="placeholder-text" style="font-size: 1rem; margin-top: 8px;">${activeVar.label}画像 生成待ち</div>
             <div class="placeholder-sub" style="font-size: 0.8rem; margin-top: 4px;">
-              output/${item.code.slice(0, 2)}/${item.code}/${v === 'base' ? 'base' : v}.png
+              output/${esc(item.code.slice(0, 2))}/${esc(item.code)}/${esc(v)}.png
             </div>
           </div>
         `;
@@ -5952,44 +5917,44 @@
       renderModalLeft();
 
       const colors = item.color ? item.color.split(/[、,]/).map(c => c.trim()).filter(Boolean) : [];
-      const colorTagsHtml = colors.map(c => `<span class="color-tag" style="padding: 4px 10px; font-size: 0.8rem;">${c}</span>`).join(' ');
+      const colorTagsHtml = colors.map(c => `<span class="color-tag" style="padding: 4px 10px; font-size: 0.8rem;">${esc(c)}</span>`).join(' ');
 
       modalRight.innerHTML = `
         <div>
-          <div class="modal-code">${item.code}</div>
-          <h2 class="modal-name">${item.name}</h2>
+          <div class="modal-code">${esc(item.code)}</div>
+          <h2 class="modal-name">${esc(item.name)}</h2>
           <div class="card-concept" style="display: inline-block; margin-top: 4px; font-size: 0.95rem;">
-            ${item.concept || 'コンセプト未設定'}
+            ${esc(item.concept || 'コンセプト未設定')}
           </div>
         </div>
 
         <div>
           <div class="modal-section-title">🏢 企業イメージ</div>
-          <div class="modal-section-body">${item.corp || '—'}</div>
+          <div class="modal-section-body">${esc(item.corp || '—')}</div>
         </div>
 
         ${item.hair ? `
         <div>
           <div class="modal-section-title">💇 髪型・ヘアスタイル</div>
-          <div class="modal-section-body">${item.hair}</div>
+          <div class="modal-section-body">${esc(item.hair)}</div>
         </div>
         ` : ''}
 
         ${item.eyes ? `
         <div>
           <div class="modal-section-title">👁️ 目・眉の形</div>
-          <div class="modal-section-body">${item.eyes}</div>
+          <div class="modal-section-body">${esc(item.eyes)}</div>
         </div>
         ` : ''}
 
         <div>
           <div class="modal-section-title">👗 ビジュアル特徴</div>
-          <div class="modal-section-body">${item.visual || '—'}</div>
+          <div class="modal-section-body">${esc(item.visual || '—')}</div>
         </div>
 
         <div>
           <div class="modal-section-title">🪄 モチーフ・小物</div>
-          <div class="modal-section-body">${item.motif || '—'}</div>
+          <div class="modal-section-body">${esc(item.motif || '—')}</div>
         </div>
 
         <div>
@@ -6004,15 +5969,15 @@
           <div class="reaction-list">
             <div class="reaction-item">
               <div class="reaction-item-title" style="color: #4ade80;">🏆 利確（勝ち）</div>
-              <div style="color: #cbd5e1;">${item.reaction_win || '未設定'}</div>
+              <div style="color: #cbd5e1;">${esc(item.reaction_win || '未設定')}</div>
             </div>
             <div class="reaction-item">
               <div class="reaction-item-title" style="color: #38bdf8;">💧 通常負け（微損）</div>
-              <div style="color: #cbd5e1;">${item.reaction_loss || '未設定'}</div>
+              <div style="color: #cbd5e1;">${esc(item.reaction_loss || '未設定')}</div>
             </div>
             <div class="reaction-item">
               <div class="reaction-item-title" style="color: #f87171;">💥 損切り（大負け・服破れ/煤/破損）</div>
-              <div style="color: #cbd5e1;">${item.reaction_sl || '未設定'}</div>
+              <div style="color: #cbd5e1;">${esc(item.reaction_sl || '未設定')}</div>
             </div>
           </div>
         </div>
@@ -6034,13 +5999,11 @@
       if (e.key === 'Escape') closeModal();
     });
 
-    // 検索イベント
     searchInput.addEventListener('input', (e) => {
       searchQuery = e.target.value;
       renderCards();
     });
 
-    // フィルタータブ切り替え
     filterButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         filterButtons.forEach(b => b.classList.remove('active'));
@@ -6050,7 +6013,6 @@
       });
     });
 
-    // 初期化
     updateCounts();
     renderCards();
   </script>
